@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BrowseFoodApp</string>
+
+    <!--Main Activity-->
+    <string name="home">Home</string>
+    <string name="favorites">Favorite</string>
+    <string name="categories">Category</string>
+    <!-- Home Fragment -->
+    <string name="label_one">What would you like to eat?</string>
+    <string name="content_description">Random Meal Image</string>
+
+    <!-- Place Holder -->
+    <string name="meal_name">Meal Name</string>
+
+
+
+</resources>
