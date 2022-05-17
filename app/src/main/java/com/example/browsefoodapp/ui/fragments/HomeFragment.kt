@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.browsefoodapp.adapter.HomeFragmentOverPopularAdapter
+import com.example.browsefoodapp.adapter.OverPopularMealAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 import com.example.browsefoodapp.viewmodel.HomeViewModel
@@ -18,11 +18,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel:HomeViewModel
-    private lateinit var homeFragmentOverPopularAdapter: HomeFragmentOverPopularAdapter
+    private lateinit var homeFragmentOverPopularAdapter: OverPopularMealAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeFragmentOverPopularAdapter = HomeFragmentOverPopularAdapter()
+        homeFragmentOverPopularAdapter = OverPopularMealAdapter()
     }
 
     private fun updateRandomMealImageView()
