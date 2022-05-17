@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.browsefoodapp.adapter.HomeFragmentAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
-import com.example.browsefoodapp.model.MealByCategorySeaFood
+import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 import com.example.browsefoodapp.viewmodel.HomeViewModel
 
 
