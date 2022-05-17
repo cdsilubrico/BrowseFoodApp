@@ -1,4 +1,4 @@
-package com.example.browsefoodapp.model
+package com.example.browsefoodapp.model.theMealDb
 
 data class MealByCategorySeaFood(
     val idMeal: String,

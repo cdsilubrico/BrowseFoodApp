@@ -1,4 +1,4 @@
-package com.example.browsefoodapp.model
+package com.example.browsefoodapp.model.theMealDb
 
 data class Meal(
     val dateModified: Any,
