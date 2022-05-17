@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.browsefoodapp.adapter.Home.OverPopularMealAdapter
+import com.example.browsefoodapp.adapter.home.OverPopularMealAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 import com.example.browsefoodapp.viewmodel.HomeViewModel
