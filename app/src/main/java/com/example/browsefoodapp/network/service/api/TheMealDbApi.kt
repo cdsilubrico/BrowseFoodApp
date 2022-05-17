@@ -18,5 +18,4 @@ interface TheMealDbApi {
     @GET("categories.php")
     fun getAllCategories(): Call<MealCategories>
 
-
 }
