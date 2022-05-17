@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.browsefoodapp.databinding.RvItemsTemplateBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 
-class HomeFragmentOverPopularAdapter : RecyclerView.Adapter<HomeFragmentOverPopularAdapter.HomeFragmentViewHolder>() {
+class OverPopularMealAdapter : RecyclerView.Adapter<OverPopularMealAdapter.HomeFragmentViewHolder>() {
 
     private var overPopularMealList = ArrayList<MealByCategorySeaFood>()
     /*
