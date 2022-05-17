@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.browsefoodapp.model.Meal
-import com.example.browsefoodapp.model.MealByCategorySeaFood
-import com.example.browsefoodapp.model.MealList
-import com.example.browsefoodapp.model.MealSeaFood
+import com.example.browsefoodapp.model.theMealDb.Meal
+import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
+import com.example.browsefoodapp.model.theMealDb.MealList
+import com.example.browsefoodapp.model.theMealDb.MealSeaFood
 import com.example.browsefoodapp.network.service.retrofit.RetrofitHttp
 import retrofit2.Call
 import retrofit2.Callback
