@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.browsefoodapp.databinding.RvItemsTemplateBinding
-import com.example.browsefoodapp.model.MealByCategorySeaFood
+import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 
 class HomeFragmentAdapter : RecyclerView.Adapter<HomeFragmentAdapter.HomeFragmentViewHolder>() {
 
