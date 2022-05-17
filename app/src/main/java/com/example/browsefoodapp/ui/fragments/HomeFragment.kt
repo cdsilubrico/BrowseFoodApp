@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.browsefoodapp.adapter.HomeFragmentAdapter
+import com.example.browsefoodapp.adapter.HomeFragmentOverPopularAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 import com.example.browsefoodapp.viewmodel.HomeViewModel
@@ -18,11 +18,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel:HomeViewModel
-    private lateinit var homeFragmentAdapter: HomeFragmentAdapter
+    private lateinit var homeFragmentOverPopularAdapter: HomeFragmentOverPopularAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeFragmentAdapter = HomeFragmentAdapter()
+        homeFragmentOverPopularAdapter = HomeFragmentOverPopularAdapter()
     }
 
     private fun updateRandomMealImageView()
@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
     {
         binding.rvOverPopularMeals.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-            adapter = homeFragmentAdapter
+            adapter = homeFragmentOverPopularAdapter
         }
     }
 
@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
     {
         homeViewModel.observableOverPopularMealData().observe(viewLifecycleOwner){
             mealByCategory ->
-            homeFragmentAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
+            homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
         }
     }
 }
