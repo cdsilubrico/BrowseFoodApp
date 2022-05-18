@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.browsefoodapp.adapter.home.MealCategoriesAdapter
 import com.example.browsefoodapp.adapter.home.OverPopularMealAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
+import com.example.browsefoodapp.model.theMealDb.Category
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 import com.example.browsefoodapp.viewmodel.HomeViewModel
 
@@ -19,10 +22,12 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel:HomeViewModel
     private lateinit var homeFragmentOverPopularAdapter: OverPopularMealAdapter
+    private lateinit var homeFragmentCategoriesAdapter: MealCategoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeFragmentOverPopularAdapter = OverPopularMealAdapter()
+        homeFragmentCategoriesAdapter = MealCategoriesAdapter()
     }
 
     private fun updateRandomMealImageView()
@@ -63,6 +68,10 @@ class HomeFragment : Fragment() {
         prepareOverPopularItemsRecView()
         homeViewModel.getOverPopularMealData()
         observeOverPopularMeal()
+
+        prepareMealCategoryItemsRecView()
+        homeViewModel.getMealCategoryData()
+        observeMealCategory()
     }
 
     private fun prepareOverPopularItemsRecView()
@@ -78,6 +87,23 @@ class HomeFragment : Fragment() {
         homeViewModel.observableOverPopularMealData().observe(viewLifecycleOwner){
             mealByCategory ->
             homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
+        }
+    }
+
+    private fun prepareMealCategoryItemsRecView()
+    {
+        binding.rvMealCategory.apply {
+            layoutManager = GridLayoutManager(activity,2,GridLayoutManager.VERTICAL,false)
+            adapter = homeFragmentCategoriesAdapter
+        }
+    }
+
+    private fun observeMealCategory()
+    {
+        homeViewModel.observableMealCategoryData().observe(viewLifecycleOwner)
+        {
+            mealCategory ->
+            homeFragmentCategoriesAdapter.setMealCategories(mealCategoriesList = mealCategory as ArrayList<Category>)
         }
     }
 }

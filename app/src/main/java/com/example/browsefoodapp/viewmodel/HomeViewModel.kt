@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.browsefoodapp.model.theMealDb.Meal
-import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
-import com.example.browsefoodapp.model.theMealDb.MealList
-import com.example.browsefoodapp.model.theMealDb.MealSeaFood
+import com.example.browsefoodapp.model.theMealDb.*
 import com.example.browsefoodapp.network.service.retrofit.RetrofitHttp
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +14,9 @@ class HomeViewModel : ViewModel() {
 
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var overPopularMealData = MutableLiveData<List<MealByCategorySeaFood>>()
+    private var mealCategoryData = MutableLiveData<List<Category>>()
 
+    //Random Meal
     fun getRandomMeal() {
         RetrofitHttp.theMealDbApi.getRandomMeal().enqueue(object : Callback<MealList?> {
             override fun onResponse(call: Call<MealList?>, response: Response<MealList?>) {
@@ -33,7 +32,9 @@ class HomeViewModel : ViewModel() {
     fun observableRandomMealLiveData(): LiveData<Meal> {
         return randomMealLiveData
     }
+    //Random Meal
 
+    //Over Popular Meal
     fun getOverPopularMealData() {
         RetrofitHttp.theMealDbApi.getMealBySeafood("Seafood")
             .enqueue(object : Callback<MealSeaFood?> {
@@ -45,13 +46,36 @@ class HomeViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<MealSeaFood?>, t: Throwable) {
-                    Log.d("OverPopularMeal", t.message.toString())
+                    Log.d("GetOverPopularMeal", t.message.toString())
                 }
             })
     }
 
     fun observableOverPopularMealData(): LiveData<List<MealByCategorySeaFood>> {
         return overPopularMealData
+    }
+    //Over Popular Meal
+
+    //Meal Category
+    fun getMealCategoryData()
+    {
+        RetrofitHttp.theMealDbApi.getAllCategories().enqueue(object : Callback<MealCategories?> {
+            override fun onResponse(
+                call: Call<MealCategories?>,
+                response: Response<MealCategories?>
+            ) {
+                mealCategoryData.value = response.body()!!.categories
+            }
+
+            override fun onFailure(call: Call<MealCategories?>, t: Throwable) {
+                Log.d("GetCategoryMeal",t.message.toString())
+            }
+        })
+    }
+
+    fun observableMealCategoryData():LiveData<List<Category>>
+    {
+        return mealCategoryData
     }
 
 }
