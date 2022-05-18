@@ -20,7 +20,7 @@ import com.example.browsefoodapp.viewmodel.HomeViewModel
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var homeViewModel:HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeFragmentOverPopularAdapter: OverPopularMealAdapter
     private lateinit var homeFragmentCategoriesAdapter: MealCategoriesAdapter
 
@@ -30,10 +30,10 @@ class HomeFragment : Fragment() {
         homeFragmentCategoriesAdapter = MealCategoriesAdapter()
     }
 
-    private fun updateRandomMealImageView()
-    {
+    private fun updateRandomMealImageView() {
         homeViewModel.getRandomMeal()
-        homeViewModel.observableRandomMealLiveData().observe(viewLifecycleOwner
+        homeViewModel.observableRandomMealLiveData().observe(
+            viewLifecycleOwner
         ) { t ->
             Glide.with(this@HomeFragment)
                 .load(t!!.strMealThumb)
@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -74,35 +74,30 @@ class HomeFragment : Fragment() {
         observeMealCategory()
     }
 
-    private fun prepareOverPopularItemsRecView()
-    {
+    private fun prepareOverPopularItemsRecView() {
         binding.rvOverPopularMeals.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = homeFragmentOverPopularAdapter
         }
     }
 
-    private fun observeOverPopularMeal()
-    {
-        homeViewModel.observableOverPopularMealData().observe(viewLifecycleOwner){
-            mealByCategory ->
-            homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
-        }
+    private fun observeOverPopularMeal() {
+        homeViewModel.observableOverPopularMealData()
+            .observe(viewLifecycleOwner) { mealByCategory ->
+                homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
+            }
     }
 
-    private fun prepareMealCategoryItemsRecView()
-    {
+    private fun prepareMealCategoryItemsRecView() {
         binding.rvMealCategory.apply {
-            layoutManager = GridLayoutManager(activity,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
             adapter = homeFragmentCategoriesAdapter
         }
     }
 
-    private fun observeMealCategory()
-    {
+    private fun observeMealCategory() {
         homeViewModel.observableMealCategoryData().observe(viewLifecycleOwner)
-        {
-            mealCategory ->
+        { mealCategory ->
             homeFragmentCategoriesAdapter.setMealCategories(mealCategoriesList = mealCategory as ArrayList<Category>)
         }
     }
