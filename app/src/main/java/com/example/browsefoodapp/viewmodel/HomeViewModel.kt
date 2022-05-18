@@ -77,5 +77,6 @@ class HomeViewModel : ViewModel() {
     {
         return mealCategoryData
     }
+    //Meal Category
 
 }
