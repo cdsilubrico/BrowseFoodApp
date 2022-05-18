@@ -80,7 +80,8 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/content_description"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/sample_food" />
+                            android:src="@drawable/sample_food"
+                            tools:ignore="ImageContrastCheck" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -120,7 +121,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
@@ -143,7 +144,7 @@
                         android:layout_height="wrap_content"
                         tools:listitem="@layout/rv_meal_categories_template" />
 
-                </LinearLayout>
+                </GridLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
