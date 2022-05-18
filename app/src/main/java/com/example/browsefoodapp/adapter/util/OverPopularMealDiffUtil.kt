@@ -1,7 +1,6 @@
 package com.example.browsefoodapp.adapter.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.browsefoodapp.model.theMealDb.Category
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 
 class OverPopularMealDiffUtil(

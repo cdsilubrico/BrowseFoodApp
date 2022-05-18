@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.browsefoodapp.adapter.util.MealCategoriesDiffUtil
 import com.example.browsefoodapp.adapter.util.OverPopularMealDiffUtil
 import com.example.browsefoodapp.databinding.RvItemsTemplateBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
