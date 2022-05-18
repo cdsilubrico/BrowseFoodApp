@@ -2,20 +2,25 @@ package com.example.browsefoodapp.adapter.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.browsefoodapp.adapter.util.MealCategoriesDiffUtil
 import com.example.browsefoodapp.databinding.RvMealCategoriesTemplateBinding
 import com.example.browsefoodapp.model.theMealDb.Category
 
 class MealCategoriesAdapter : RecyclerView.Adapter<MealCategoriesAdapter.HomeFragmentViewHolder>() {
 
-    private var mealCategoriesList = ArrayList<Category>()
+    private var mealCategoriesList = emptyList<Category>()
 
     inner class HomeFragmentViewHolder(val binding: RvMealCategoriesTemplateBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     fun setMealCategories(mealCategoriesList: ArrayList<Category>) {
+        val mealCategoriesDiffUtil = MealCategoriesDiffUtil(mealCategoriesList,this.mealCategoriesList)
+        val diffResults = DiffUtil.calculateDiff(mealCategoriesDiffUtil)
         this.mealCategoriesList = mealCategoriesList
+        diffResults.dispatchUpdatesTo(this)
         //notifyDataSetChanged()
     }
 

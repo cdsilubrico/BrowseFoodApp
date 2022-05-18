@@ -2,14 +2,17 @@ package com.example.browsefoodapp.adapter.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.browsefoodapp.adapter.util.MealCategoriesDiffUtil
+import com.example.browsefoodapp.adapter.util.OverPopularMealDiffUtil
 import com.example.browsefoodapp.databinding.RvItemsTemplateBinding
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
 
 class OverPopularMealAdapter : RecyclerView.Adapter<OverPopularMealAdapter.HomeFragmentViewHolder>() {
 
-    private var overPopularMealList = ArrayList<MealByCategorySeaFood>()
+    private var overPopularMealList = emptyList<MealByCategorySeaFood>()
     /*
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -18,8 +21,10 @@ class OverPopularMealAdapter : RecyclerView.Adapter<OverPopularMealAdapter.HomeF
 
     fun setOverPopularMeal(overPopularMealList:ArrayList<MealByCategorySeaFood>)
     {
+        val overPopularMealListDiffUtil = OverPopularMealDiffUtil(overPopularMealList,this.overPopularMealList)
+        val diffResults = DiffUtil.calculateDiff(overPopularMealListDiffUtil)
         this.overPopularMealList = overPopularMealList
-        //notifyDataSetChanged()
+        diffResults.dispatchUpdatesTo(this)
     }
 
     // Create new views (invoked by the layout manager)
