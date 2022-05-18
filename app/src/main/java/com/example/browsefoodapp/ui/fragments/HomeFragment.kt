@@ -66,11 +66,9 @@ class HomeFragment : Fragment() {
         updateRandomMealImageView()
 
         prepareOverPopularItemsRecView()
-        homeViewModel.getOverPopularMealData()
         observeOverPopularMeal()
 
         prepareMealCategoryItemsRecView()
-        homeViewModel.getMealCategoryData()
         observeMealCategory()
     }
 
@@ -82,6 +80,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeOverPopularMeal() {
+        homeViewModel.getOverPopularMealData()
         homeViewModel.observableOverPopularMealData()
             .observe(viewLifecycleOwner) { mealByCategory ->
                 homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
@@ -96,6 +95,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeMealCategory() {
+        homeViewModel.getMealCategoryData()
         homeViewModel.observableMealCategoryData().observe(viewLifecycleOwner)
         { mealCategory ->
             homeFragmentCategoriesAdapter.setMealCategories(mealCategoriesList = mealCategory as ArrayList<Category>)
