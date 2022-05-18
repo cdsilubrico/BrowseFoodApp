@@ -9,6 +9,8 @@
     <string name="label_one">What would you like to eat?</string>
     <string name="content_description">Random Meal Image</string>
     <string name="category_name">Category Name</string>
+    <string name="category">category</string>
+    <string name="over_popular_meals">over popular meals</string>
 
     <!-- Place Holder -->
     <string name="meal_name">Meal Name</string>
