@@ -16,7 +16,7 @@ object RetrofitHttp {
     }
 
     private const val BASE_URL_LOGIN_API = "http://localhost:8080/api/"
-    val loginApi: LoginApi by lazy {
+    val accountApi: LoginApi by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL_LOGIN_API)
             .addConverterFactory(GsonConverterFactory.create())
