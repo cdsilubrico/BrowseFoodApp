@@ -76,9 +76,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun onRandomMealClick() {
-        homeViewModel.observableRandomMealLiveData().observe(viewLifecycleOwner){
-            t ->
-            binding.cvRandomMeal.setOnClickListener{
+        homeViewModel.observableRandomMealLiveData().observe(viewLifecycleOwner) { t ->
+            binding.cvRandomMeal.setOnClickListener {
                 val intent = Intent(activity, MealDetailsActivity::class.java)
                 intent.putExtra("MEAL_NAME", t.strMeal)
                 intent.putExtra("MEAL_AREA", t.strArea)
@@ -119,8 +118,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun prepareData()
-    {
+    private fun prepareData() {
         homeViewModel.getMealCategoryData()
         homeViewModel.getOverPopularMealData()
         homeViewModel.getRandomMeal()
