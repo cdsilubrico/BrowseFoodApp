@@ -1,5 +1,6 @@
 package com.example.browsefoodapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.example.browsefoodapp.adapter.home.OverPopularMealAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
 import com.example.browsefoodapp.model.theMealDb.Category
 import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
+import com.example.browsefoodapp.ui.activities.MealDetailsActivity
 import com.example.browsefoodapp.viewmodel.HomeViewModel
 
 
@@ -28,22 +30,6 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         homeFragmentOverPopularAdapter = OverPopularMealAdapter()
         homeFragmentCategoriesAdapter = MealCategoriesAdapter()
-    }
-
-    private fun updateRandomMealImageView() {
-        homeViewModel.getRandomMeal()
-        homeViewModel.observableRandomMealLiveData().observe(
-            viewLifecycleOwner
-        ) { t ->
-            Glide.with(this@HomeFragment)
-                .load(t!!.strMealThumb)
-                .into(binding.ivRandomMeal)
-            binding.tvMealName.text = t.strMeal
-        }
-    }
-
-    private fun prepareHomeViewModel() {
-        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -62,14 +48,47 @@ class HomeFragment : Fragment() {
         //prepare View Model
         prepareHomeViewModel()
 
-        //update UI
-        updateRandomMealImageView()
+        //prepare Data
+        prepareData()
 
+        //update UI
+        updateRandomMeal()
+        onRandomMealClick()
         prepareOverPopularItemsRecView()
         observeOverPopularMeal()
-
         prepareMealCategoryItemsRecView()
         observeMealCategory()
+    }
+
+    private fun prepareHomeViewModel() {
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+    }
+
+    private fun updateRandomMeal() {
+        homeViewModel.observableRandomMealLiveData().observe(
+            viewLifecycleOwner
+        ) { t ->
+            Glide.with(this@HomeFragment)
+                .load(t!!.strMealThumb)
+                .into(binding.ivRandomMeal)
+            binding.tvMealName.text = t.strMeal
+        }
+    }
+
+    private fun onRandomMealClick() {
+        homeViewModel.observableRandomMealLiveData().observe(viewLifecycleOwner){
+            t ->
+            binding.cvRandomMeal.setOnClickListener{
+                val intent = Intent(activity, MealDetailsActivity::class.java)
+                intent.putExtra("MEAL_NAME", t.strMeal)
+                intent.putExtra("MEAL_AREA", t.strArea)
+                intent.putExtra("MEAL_CATEGORY", t.strCategory)
+                intent.putExtra("MEAL_THUMB", t.strMealThumb)
+                intent.putExtra("MEAL_INSTRUCTIONS", t.strInstructions)
+                intent.putExtra("YOUTUBE_LINK", t.strYoutube)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun prepareOverPopularItemsRecView() {
@@ -80,7 +99,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeOverPopularMeal() {
-        homeViewModel.getOverPopularMealData()
         homeViewModel.observableOverPopularMealData()
             .observe(viewLifecycleOwner) { mealByCategory ->
                 homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
@@ -95,10 +113,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeMealCategory() {
-        homeViewModel.getMealCategoryData()
         homeViewModel.observableMealCategoryData().observe(viewLifecycleOwner)
         { mealCategory ->
             homeFragmentCategoriesAdapter.setMealCategories(mealCategoriesList = mealCategory as ArrayList<Category>)
         }
+    }
+
+    private fun prepareData()
+    {
+        homeViewModel.getMealCategoryData()
+        homeViewModel.getOverPopularMealData()
+        homeViewModel.getRandomMeal()
     }
 }

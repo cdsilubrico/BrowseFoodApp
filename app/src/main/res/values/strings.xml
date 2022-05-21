@@ -11,11 +11,16 @@
     <string name="category_name">Category Name</string>
     <string name="category">categories</string>
     <string name="over_popular_meals">over popular meals</string>
+    <string name="place_holder_meal_name">Meal name</string>
+    <string name="place_holder_area">Area</string>
+    <string name="place_holder_instructions">Instructions</string>
 
     <!-- Place Holder -->
     <string name="meal_name">Meal Name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="place_holder_instructions_details">Instruction Details</string>
+    <string name="tags">Tags</string>
 
 
 </resources>
