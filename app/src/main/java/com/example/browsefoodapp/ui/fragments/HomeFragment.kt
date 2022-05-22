@@ -106,7 +106,7 @@ class HomeFragment : Fragment() {
 
     private fun prepareMealCategoryItemsRecView() {
         binding.rvMealCategory.apply {
-            layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
             adapter = homeFragmentCategoriesAdapter
         }
     }
