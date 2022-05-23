@@ -1,5 +1,7 @@
 package com.example.browsefoodapp.model.theMealDb
 
 data class MealSeaFood(
-    val meals: List<MealByCategorySeaFood>
+    val idMeal: String,
+    val strMeal: String,
+    val strMealThumb: String
 )
