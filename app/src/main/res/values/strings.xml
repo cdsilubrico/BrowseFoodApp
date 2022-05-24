@@ -6,7 +6,7 @@
     <string name="favorites">Favorite</string>
     <string name="categories">Category</string>
     <!-- Home Fragment -->
-    <string name="label_one">What would you like to eat?</string>
+    <string name="label_one">what would you like to eat?</string>
     <string name="content_description">Random Meal Image</string>
     <string name="category_name">Category Name</string>
     <string name="category">categories</string>
