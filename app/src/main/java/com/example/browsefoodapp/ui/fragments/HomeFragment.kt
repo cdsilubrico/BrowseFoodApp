@@ -14,7 +14,7 @@ import com.example.browsefoodapp.adapter.home.MealCategoriesAdapter
 import com.example.browsefoodapp.adapter.home.OverPopularMealAdapter
 import com.example.browsefoodapp.databinding.FragmentHomeBinding
 import com.example.browsefoodapp.model.theMealDb.Category
-import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
+import com.example.browsefoodapp.model.theMealDb.MealSeaFood
 import com.example.browsefoodapp.ui.activities.MealDetailsActivity
 import com.example.browsefoodapp.viewmodel.HomeViewModel
 
@@ -49,15 +49,26 @@ class HomeFragment : Fragment() {
         prepareHomeViewModel()
 
         //prepare Data
-        prepareData()
+        prepareRequiredData()
 
         //update UI
         updateRandomMeal()
-        onRandomMealClick()
+
+        //onRandomMealClick()
+        onMealClick()
+
         prepareOverPopularItemsRecView()
         observeOverPopularMeal()
+        overPopularItemsOnClick()
+
         prepareMealCategoryItemsRecView()
         observeMealCategory()
+    }
+
+    private fun overPopularItemsOnClick() {
+        homeFragmentOverPopularAdapter.onItemClick = {
+
+        }
     }
 
     private fun prepareHomeViewModel() {
@@ -69,24 +80,9 @@ class HomeFragment : Fragment() {
             viewLifecycleOwner
         ) { t ->
             Glide.with(this@HomeFragment)
-                .load(t!!.strMealThumb)
+                .load(t.strMealThumb)
                 .into(binding.ivRandomMeal)
             binding.tvMealName.text = t.strMeal
-        }
-    }
-
-    private fun onRandomMealClick() {
-        homeViewModel.observableRandomMealLiveData().observe(viewLifecycleOwner) { t ->
-            binding.cvRandomMeal.setOnClickListener {
-                val intent = Intent(activity, MealDetailsActivity::class.java)
-                intent.putExtra("MEAL_NAME", t.strMeal)
-                intent.putExtra("MEAL_AREA", t.strArea)
-                intent.putExtra("MEAL_CATEGORY", t.strCategory)
-                intent.putExtra("MEAL_THUMB", t.strMealThumb)
-                intent.putExtra("MEAL_INSTRUCTIONS", t.strInstructions)
-                intent.putExtra("YOUTUBE_LINK", t.strYoutube)
-                startActivity(intent)
-            }
         }
     }
 
@@ -100,7 +96,7 @@ class HomeFragment : Fragment() {
     private fun observeOverPopularMeal() {
         homeViewModel.observableOverPopularMealData()
             .observe(viewLifecycleOwner) { mealByCategory ->
-                homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealByCategorySeaFood>)
+                homeFragmentOverPopularAdapter.setOverPopularMeal(overPopularMealList = mealByCategory as ArrayList<MealSeaFood>)
             }
     }
 
@@ -118,7 +114,22 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun prepareData() {
+    private fun onMealClick() {
+        homeViewModel.observableMealData().observe(viewLifecycleOwner) { mealFullDetails ->
+            binding.cvRandomMeal.setOnClickListener {
+                val intent = Intent(activity, MealDetailsActivity::class.java)
+                intent.putExtra("MEAL_NAME", mealFullDetails.strMeal)
+                intent.putExtra("MEAL_AREA", mealFullDetails.strArea)
+                intent.putExtra("MEAL_CATEGORY", mealFullDetails.strCategory)
+                intent.putExtra("MEAL_THUMB", mealFullDetails.strMealThumb)
+                intent.putExtra("MEAL_INSTRUCTIONS", mealFullDetails.strInstructions)
+                intent.putExtra("YOUTUBE_LINK", mealFullDetails.strYoutube)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun prepareRequiredData() {
         homeViewModel.getMealCategoryData()
         homeViewModel.getOverPopularMealData()
         homeViewModel.getRandomMeal()
