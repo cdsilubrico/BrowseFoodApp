@@ -1,11 +1,11 @@
 package com.example.browsefoodapp.adapter.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.browsefoodapp.model.theMealDb.MealByCategorySeaFood
+import com.example.browsefoodapp.model.theMealDb.MealSeaFood
 
 class OverPopularMealDiffUtil(
-    private val oldList: List<MealByCategorySeaFood>,
-    private val newList: List<MealByCategorySeaFood>
+    private val oldList: List<MealSeaFood>,
+    private val newList: List<MealSeaFood>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
