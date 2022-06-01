@@ -4,7 +4,7 @@ import com.example.browsefoodapp.network.service.api.TheMealDbApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitHttp {
+object RetrofitService {
 
     private const val BASE_URL_FOOD_API = "https://www.themealdb.com/api/json/v1/1/"
     val theMealDbApi: TheMealDbApi by lazy {
