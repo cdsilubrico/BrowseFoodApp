@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.browsefoodapp.model.theMealDb.*
-import com.example.browsefoodapp.network.service.retrofit.RetrofitHttp
+import com.example.browsefoodapp.network.service.retrofit.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
 
     //Random Meal
     fun getRandomMeal() {
-        RetrofitHttp.theMealDbApi.getRandomMeal().enqueue(object : Callback<MealList?> {
+        RetrofitService.theMealDbApi.getRandomMeal().enqueue(object : Callback<MealList?> {
             override fun onResponse(call: Call<MealList?>, response: Response<MealList?>) {
                 randomMealLiveData.value = response.body()!!.meals[0]
             }
@@ -37,7 +37,7 @@ class HomeViewModel : ViewModel() {
 
     //Over Popular Meal
     fun getOverPopularMealData() {
-        RetrofitHttp.theMealDbApi.getMealBySeafood("Seafood")
+        RetrofitService.theMealDbApi.getMealBySeafood("Seafood")
             .enqueue(object : Callback<MealSeaFoodList?> {
                 override fun onResponse(
                     call: Call<MealSeaFoodList?>,
@@ -59,7 +59,7 @@ class HomeViewModel : ViewModel() {
 
     //Meal Category
     fun getMealCategoryData() {
-        RetrofitHttp.theMealDbApi.getAllCategories().enqueue(object : Callback<CategoriesList?> {
+        RetrofitService.theMealDbApi.getAllCategories().enqueue(object : Callback<CategoriesList?> {
             override fun onResponse(
                 call: Call<CategoriesList?>,
                 response: Response<CategoriesList?>
@@ -80,12 +80,13 @@ class HomeViewModel : ViewModel() {
 
     //MealLookUp
     fun getMealData(id: String) {
-        RetrofitHttp.theMealDbApi.getMeal(id).enqueue(object : Callback<MealFullDetailsList?> {
+        RetrofitService.theMealDbApi.getMeal(id).enqueue(object : Callback<MealFullDetailsList?> {
             override fun onResponse(
                 call: Call<MealFullDetailsList?>,
                 response: Response<MealFullDetailsList?>
             ) {
                 mealLookUpData.value = response.body()!!.meals[0]
+                Log.d("HERE",response.body()!!.meals[0].toString())
             }
 
             override fun onFailure(call: Call<MealFullDetailsList?>, t: Throwable) {
