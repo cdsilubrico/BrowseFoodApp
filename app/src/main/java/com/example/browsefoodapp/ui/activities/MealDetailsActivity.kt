@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.browsefoodapp.databinding.ActivityMealDetailsBinding
 
@@ -29,23 +30,20 @@ class MealDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun updateMealImage()
-    {
+    private fun updateMealImage() {
         Glide.with(this)
             .load(thumb)
             .into(binding.ivMeal)
     }
 
-    private fun loadTextViewValues()
-    {
+    private fun loadTextViewValues() {
         binding.tvMealName.text = name
         binding.tvCategory.text = category
         binding.tvArea.text = area
         binding.tvInstructions.text = instruction
     }
 
-    private fun getIntentData()
-    {
+    private fun getIntentData() {
         name = intent.getStringExtra("MEAL_NAME").toString()
         area = intent.getStringExtra("MEAL_AREA").toString()
         thumb = intent.getStringExtra("MEAL_THUMB").toString()
@@ -54,12 +52,18 @@ class MealDetailsActivity : AppCompatActivity() {
         link = intent.getStringExtra("YOUTUBE_LINK").toString()
     }
 
-    private fun onYoutubeClick()
-    {
-        binding.ivYtLink.setOnClickListener{
-            val yt = Intent(Intent.ACTION_VIEW,  Uri.parse(link))
-            startActivity(yt)
+    private fun onYoutubeClick() {
+
+        if (link == null) {
+            //Toast link is empty
+        } else {
+            binding.ivYtLink.setOnClickListener {
+                val yt = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                startActivity(yt)
+            }
         }
+
+
     }
 
 }

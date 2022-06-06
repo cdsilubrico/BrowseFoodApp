@@ -86,7 +86,6 @@ class HomeViewModel : ViewModel() {
                 response: Response<MealFullDetailsList?>
             ) {
                 mealLookUpData.value = response.body()!!.meals[0]
-                Log.d("HERE",response.body()!!.meals[0].toString())
             }
 
             override fun onFailure(call: Call<MealFullDetailsList?>, t: Throwable) {
